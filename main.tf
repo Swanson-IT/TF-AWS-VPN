@@ -20,11 +20,11 @@ resource "aws_vpn_gateway" "this" {
 
 # VPN Connection
 resource "aws_vpn_connection" "this" {
-  customer_gateway_id = aws_customer_gateway.this.id
-  vpn_gateway_id      = aws_vpn_gateway.this.id
-  type                = "ipsec.1"
-
-  static_routes_only = var.static_routes_only
+  customer_gateway_id   = aws_customer_gateway.this.id
+  vpn_gateway_id        = aws_vpn_gateway.this.id
+  type                  = "ipsec.1"
+  tunnel1_preshared_key = var.tunnel1_preshared_key
+  static_routes_only    = var.static_routes_only
 
   tags = {
     Name = var.vpn_connection_name
