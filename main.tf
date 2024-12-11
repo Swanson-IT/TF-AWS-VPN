@@ -1,6 +1,5 @@
 # Customer Gateway
 resource "aws_customer_gateway" "this" {
-  bgp_asn    = var.bgp_asn
   ip_address = var.customer_gateway_ip
   type       = "ipsec.1"
 
@@ -23,10 +22,16 @@ resource "aws_vpn_connection" "this" {
   customer_gateway_id   = aws_customer_gateway.this.id
   vpn_gateway_id        = aws_vpn_gateway.this.id
   type                  = "ipsec.1"
+  static_routes_only    = true # Static routing instead of BGP
   tunnel1_preshared_key = var.tunnel1_preshared_key
-  static_routes_only    = var.static_routes_only
 
   tags = {
     Name = var.vpn_connection_name
   }
+}
+
+# Static Route
+resource "aws_vpn_connection_route" "this" {
+  destination_cidr_block = "10.0.0.0/16" # Replace with your desired CIDR
+  vpn_connection_id      = aws_vpn_connection.this.id
 }

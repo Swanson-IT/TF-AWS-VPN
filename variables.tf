@@ -13,16 +13,10 @@ variable "customer_gateway_ip" {
   type        = string
 }
 
-variable "bgp_asn" {
-  description = "Border Gateway Protocol (BGP) Autonomous System Number (ASN) for the customer gateway"
-  type        = number
-  default     = 65000
-}
-
 variable "static_routes_only" {
   description = "Whether to use static routes instead of dynamic routing with BGP"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "customer_gateway_name" {
