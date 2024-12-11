@@ -3,6 +3,11 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "tunnel1_preshared_key" {
+  description = "Key for the VPN Gateway"
+  type        = string
+}
+
 variable "customer_gateway_ip" {
   description = "Public IP address of the customer gateway"
   type        = string
