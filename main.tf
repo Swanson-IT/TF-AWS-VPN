@@ -1,6 +1,7 @@
 # Customer Gateway
 resource "aws_customer_gateway" "this" {
   ip_address = var.customer_gateway_ip
+  bgp_asn    = "65000"
   type       = "ipsec.1"
 
   tags = {
